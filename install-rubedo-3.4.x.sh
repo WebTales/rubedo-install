@@ -300,6 +300,8 @@ case "$(get_distribution_type)" in
 			echo "INFO: Distribution release ($version)"
                 	case "$version" in # Détection de la version
 							"DISTRIB_RELEASE=16.04")
+					sudo add-apt-repository -y $PHP_ADDREPOSITORY # Default version of PHP is 7, >= 5.4.x is needed
+					apt-get update
 					apt-get install -y $PHP_PACKAGES_UBUNTU16
 							;;
                         	"DISTRIB_RELEASE=14.04")
