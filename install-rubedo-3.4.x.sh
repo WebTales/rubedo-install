@@ -332,7 +332,12 @@ case "$(get_distribution_type)" in
                 if [ $STEP_12 -eq 0 ]
 		then
 			echo "INFO: Configuring PHP..."
-			sed -i "$PHP_CONFIG_TIMEZONE_REPLACEMENT_ALLDEB" $PHP_CONFIG_LINK_PHPINI_ALLDEB
+			if [ $version = 'DISTRIB_RELEASE=16.04' ]
+			then
+				sed -i "$PHP_CONFIG_TIMEZONE_REPLACEMENT_ALLDEB" $PHP_CONFIG_LINK_PHPINI_UBUNTU16
+			else
+				sed -i "$PHP_CONFIG_TIMEZONE_REPLACEMENT_ALLDEB" $PHP_CONFIG_LINK_PHPINI_ALLDEB
+			fi
 			sed -i 's/STEP_12=0/STEP_12=1/' $PROGRESS_FILE
 		fi
 		echo "INFO: Installation of PHP is completed"
