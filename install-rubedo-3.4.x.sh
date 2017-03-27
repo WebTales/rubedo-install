@@ -553,7 +553,6 @@ case "$(get_distribution_type)" in
 		if [ $STEP_11 -eq 0 ]
 		then
 			echo "INFO: Installation of the PHP packages..."
-			rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 			rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 			yum install -y $PHP_PACKAGES_CENTOS
 			yum -y clean all
