@@ -237,7 +237,7 @@ case "$(get_distribution_type)" in
 		if [ $STEP_4 -eq 0 ]
 		then
 			echo "INFO: Installation of Java environment..."
-			if [ $version = "DISTRIB_RELEASE=16.04" ]
+			if [ $version = 'DISTRIB_RELEASE=16.04' ]
 			then
 				add-apt-repository -y ppa:openjdk-r/ppa
 				apt-get update
