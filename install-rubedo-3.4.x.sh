@@ -553,16 +553,11 @@ case "$(get_distribution_type)" in
 		if [ $STEP_11 -eq 0 ]
 		then
 			echo "INFO: Installation of the PHP packages..."
-			yum install -y wget
-			wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-			wget https://centos7.iuscommunity.org/ius-release.rpm
-			rpm -Uvh ius-release*.rpm
-			yum -y update
+			rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+			rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 			yum install -y $PHP_PACKAGES_CENTOS
+			yum -y clean all
 			echo "$PHP_CONFIG_WRITE" > $PHP_CONFIG_LINK_CENTOS
-			yum install -y yum-plugin-replace
-			yum replace php --replace-with php56u
-			yum install -y php56u-opcache
 			pecl install -f $PHP_PECL_PACKAGES
 			sed -i 's/STEP_11=0/STEP_11=1/' $PROGRESS_FILE
 		fi
