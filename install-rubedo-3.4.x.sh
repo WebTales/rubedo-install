@@ -1,21 +1,21 @@
 #!/bin/bash
-##################################################################################################################
-# Installation agent for Rubedo 3.4.x                     		      			 		 #
-# This agent will follow these steps:					     					 #
-# 1) MongoDB	                                        		     					 #
-# 2) Java environment & Elasticsearch                   		     					 #
-# 3) PHP and Apache                             						 		 #
-# 4) Rubedo and git							     					 #
-# For more details: http://docs.rubedo-project.org/en/homepage/install-rubedo 			 		 #
-# Compatibility: Ubuntu 14.04 Trusty Tahr, Ubuntu 12.04 Precise Pangolin, Debian 7 Wheezy, CentOS 7 and Rhel     #
-# Script for a 64 bits distribution                                                                              #
-# Don't edit this script! Please edit the configuration file: data comes from this file	         		 #
-# Usage: sudo ./script_name configuration_file token progress_file						 #
-# configuration_file: file with configurations									 #
-# token: Token of Github (go to your Github account)								 #
-# progress_file: file with progression (if you want to resume after an error for example)			 #
-# Version: 27/03/2016												 #
-##################################################################################################################
+#############################################################################################################################
+# Installation agent for Rubedo 3.4.x                     		      			 		                         			#
+# This agent will follow these steps:					     					                                 			#
+# 1) MongoDB	                                        		     					 						 			#
+# 2) Java environment & Elasticsearch                   		     					                         			#
+# 3) PHP and Apache                             						 		                                 			#
+# 4) Rubedo and git							     																 			#
+# For more details: http://docs.rubedo-project.org/en/homepage/install-rubedo 			 		 							#
+# Compatibility: Ubuntu 16.04 Ubuntu 14.04 Trusty Tahr, Ubuntu 12.04 Precise Pangolin, Debian 7 Wheezy, CentOS 7 and Rhel   #
+# Script for a 64 bits distribution                                                                              			#
+# Don't edit this script! Please edit the configuration file: data comes from this file	         		 					#
+# Usage: sudo ./script_name configuration_file token progress_file						 									#
+# configuration_file: file with configurations									 											#
+# token: Token of Github (go to your Github account)								 										#
+# progress_file: file with progression (if you want to resume after an error for example)			 						#
+# Version: 27/03/2016												 														#
+#############################################################################################################################
 
 set -e # Exit immediately if a command exits with a non-zero status
 
@@ -201,6 +201,9 @@ case "$(get_distribution_type)" in
 			echo "INFO: Create a list file for MongoDB..."
 			echo "INFO: Distribution release ($version)"
 			case "$version" in # Détection de la version
+				"DISTRIB_RELEASE=16.04")
+					echo "deb $MONGODB_LISTFILE_UBUNTU16_DEB" | tee $MONGODB_LISTFILE_ALLDEB_TEE
+				;;
 				"DISTRIB_RELEASE=14.04")
 					echo "deb $MONGODB_LISTFILE_UBUNTU14_DEB" | tee $MONGODB_LISTFILE_ALLDEB_TEE
 				;;
@@ -291,6 +294,9 @@ case "$(get_distribution_type)" in
 			echo "INFO: Installation of the PHP packages..."
 			echo "INFO: Distribution release ($version)"
                 	case "$version" in # Détection de la version
+							"DISTRIB_RELEASE=16.04")
+					apt-get install -y $PHP_PACKAGES_UBUNTU16
+							;;
                         	"DISTRIB_RELEASE=14.04")
 					apt-get install -y $PHP_PACKAGES_UBUNTU14
                         	;;
@@ -341,6 +347,15 @@ case "$(get_distribution_type)" in
 		then
 			echo "INFO: Configuring Apache..."
 			case "$version" in # Détection de la version
+				"DISTRIB_RELEASE=16.04")
+					temp_tab=( ONE TWO THREE FOUR FIVE SIX )
+					for a in `seq 0 5`;
+					do
+						temp="APACHE_UBUNTU16_REPLACEMENT_${temp_tab[$a]}"
+						sed -i "$(eval echo \$$temp)" $APACHE_UBUNTU16_LINK
+					done
+					unset a && unset temp && unset temp_tab
+				;;
 				"DISTRIB_RELEASE=14.04")
 					temp_tab=( ONE TWO THREE FOUR FIVE SIX )
 					for a in `seq 0 5`;
