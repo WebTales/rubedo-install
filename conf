@@ -87,7 +87,7 @@ ELASTICSEARCH_REPOSITORY_WRITE_LINK="/etc/yum.repos.d/elasticsearch.repo"
 ELASTICSEARCH_AUTOLOAD_CENTOS_ONE="daemon-reload"
 ELASTICSEARCH_AUTOLOAD_CENTOS_TWO="enable elasticsearch.service"
 ELASTICSEARCH_AUTOLOAD_CENTOS_LINK="/bin/systemctl"
-PHP_PACKAGES_CENTOS="httpd php56u php56u-opcache php56u-gd php56u-ldap php56u-odbc php56u-pear php56u-xml php56u-xmlrpc php56u-mbstring php56u-snmp php56u-soap curl curl-devel gcc php56u-devel
+PHP_PACKAGES_CENTOS="httpd php php-gd php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-snmp php-soap curl curl-devel gcc php-devel
 php-intl openssl-devel"
 PHP_CONFIG_LINK_CENTOS="/etc/php.d/mongo.ini"
 PHP_CONFIG_TIMEZONE_REPLACEMENT_ALLDEB="878 s/;date.timezone =/date.timezone = Europe\/Paris/"

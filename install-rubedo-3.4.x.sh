@@ -561,6 +561,8 @@ case "$(get_distribution_type)" in
 			yum install -y $PHP_PACKAGES_CENTOS
 			pecl install -f $PHP_PECL_PACKAGES
 			echo "$PHP_CONFIG_WRITE" > $PHP_CONFIG_LINK_CENTOS
+			yum install -y yum-plugin-replace
+			yum replace php --replace-with php56u
 			sed -i 's/STEP_11=0/STEP_11=1/' $PROGRESS_FILE
 		fi
 		if [ $STEP_12 -eq 0 ]
